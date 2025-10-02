@@ -17,13 +17,16 @@ jobs:
         with:
           node-version: "20.x"
           registry-url: https://registry.npmjs.org/
-      - run: npm ci
+      - run: yarn install
 
 #      - name: Prettier
-#        run: npm run lint:prettier
+#        run: yarn run lint:prettier
 #
 #      - name: Lint
-#        run: npm run lint:js
+#        run: yarn run lint:js
+
+      - name: Build
+        run: yarn run build
 
       - name: Version check
         run: |
