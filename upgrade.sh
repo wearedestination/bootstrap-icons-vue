@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 function version_of() {
-  echo "$(awk "match(\$0, \"\\\"$1\\\": \\\"(.+)\\\"\", m) {print m[1]}" package.json)"
+  echo "$(node -e "console.log(require('./package.json')$1)")"
 }
 
-LIB_CURRENT="$(version_of 'version')"
+LIB_CURRENT="$(version_of '.version')"
 LIB_NEXT="$1"
 if [[ -z "$LIB_NEXT" ]]; then
   echo "Missing version argument"
   exit 1
 fi
 
-BICON_CURRENT="$(version_of 'bootstrap-icons')"
+BICON_CURRENT="$(version_of ".devDependencies['bootstrap-icons']")"
 
 echo "Upgrading from v$LIB_CURRENT to v$LIB_NEXT..."
 
@@ -22,7 +24,7 @@ pushd dev-vite
 yarn upgrade --latest || { echo '`yarn upgrade` failed'; exit 1; }
 popd
 
-BICON_NEXT="$(version_of 'bootstrap-icons')"
+BICON_NEXT="$(version_of ".devDependencies['bootstrap-icons']")"
 
 sed -i "s/$LIB_CURRENT/$LIB_NEXT/g" package.json README.md
 
