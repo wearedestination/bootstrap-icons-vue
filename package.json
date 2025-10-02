@@ -20,7 +20,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/wearedestination/bootstrap-icons-vue"
+    "url": "git+https://github.com/wearedestination/bootstrap-icons-vue.git"
   },
   "bugs": {
     "url": "https://github.com/wearedestination/bootstrap-icons-vue/issues"
