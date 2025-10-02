@@ -1,0 +1,39 @@
+name: Publish to npm
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          registry-url: https://registry.npmjs.org/
+      - run: npm ci
+
+      - name: Prettier
+        run: npm run lint:prettier
+
+      - name: Lint
+        run: npm run lint:js
+
+      - name: Version check
+        run: |
+          package_json_version=$(node -e 'console.log(require("./package.json").version)')
+          if [ "v$package_json_version" != $GITHUB_REF_NAME ]; then
+            echo "Version in package.json (v$package_json_version) does not match the tag ($GITHUB_REF_NAME)"
+            exit 1
+          fi
+
+      - name: Publish
+        run: npm publish --access=public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
