@@ -3,7 +3,7 @@
 set -euo pipefail
 
 function version_of() {
-  echo "$(node -e "console.log(require('./package.json')$1)")"
+  echo "$(node -p "require('./package.json')$1")"
 }
 
 LIB_CURRENT="$(version_of '.version')"
