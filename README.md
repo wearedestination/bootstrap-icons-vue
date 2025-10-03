@@ -70,7 +70,7 @@ export default {
   components: {
     BIconBatteryFull,
     BIconArrow90degDown,
-    BIconBatteryFull,
+    BIconBookmark,
   },
   // ...
 };
