@@ -2,7 +2,13 @@
   "name": "@destination/bootstrap-icons-vue",
   "version": "1.13.1",
   "description": "Bootstrap icons as Vue components.",
-  "authors": "Thomas Ip <thomas@ipthomas.com>",
+  "author": "Andy Palmer <andy.palmer@wearedestination.com>",
+  "contributors": [
+    {
+      "name": "Thomas Ip",
+      "email": "thomas@ipthomas.com"
+    }
+  ],
   "license": "MIT",
   "main": "dist/lib.common.cjs",
   "module": "dist/lib.esm.js",
